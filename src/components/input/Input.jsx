@@ -69,15 +69,7 @@ function Input() {
       alert("Please Enter Name Of Song");
     }
   };
-  const handleEnter = (e) => {
-    if (e.key === "Enter" && input) {
-      e.preventDefault();
-      getSongs();
-      setInput("");
-    } else {
-      alert("Please Enter Name Of Song");
-    }
-  };
+
   return (
     <>
       <div className="flex flex-col w-1/4 my-6 items-center mx-auto">
@@ -86,7 +78,11 @@ function Input() {
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          onKeyDown={handleEnter}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleClick();
+            }
+          }}
         />
         <button
           className="bg-blue-950 hover:font-bold text-white font-medium py-2 px-4 rounded-full max-w-fit my-2"
