@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 const CLIENT_ID = "9eafbea0b36c4a17831e9b5d0d0ba8bb";
 const SPOTIFY_AUTHORIZE_ENDPOINT = "https://accounts.spotify.com/authorize";
-const REDIRECT_URL_AFTER_LOGIN = "http://localhost:5173";
+const REDIRECT_URL_AFTER_LOGIN = "https://jammingappspotify.netlify.app/";
 const SPACE_DELIMITER = "%20";
 const SCOPES = [
   "user-read-email",
