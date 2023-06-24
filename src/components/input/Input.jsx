@@ -60,8 +60,7 @@ function Input() {
     setResult(songs);
   };
 
-  const handleClick = (e) => {
-    e.preventDefault();
+  const handleClick = () => {
     if (input) {
       getSongs();
       setInput("");
@@ -80,7 +79,7 @@ function Input() {
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
-              handleClick;
+              handleClick();
             }
           }}
         />
