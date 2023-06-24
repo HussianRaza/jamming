@@ -62,14 +62,20 @@ function Input() {
 
   const handleClick = (e) => {
     e.preventDefault();
-    getSongs();
-    setInput("");
+    if (input) {
+      getSongs();
+      setInput("");
+    } else {
+      alert("Please Enter Name Of Song");
+    }
   };
   const handleEnter = (e) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && input) {
       e.preventDefault();
       getSongs();
       setInput("");
+    } else {
+      alert("Please Enter Name Of Song");
     }
   };
   return (
