@@ -35,38 +35,42 @@ function CardAdd({
     }
   };
   const handleAddToPlaylist = async () => {
-    const response = await fetch(
-      `https://api.spotify.com/v1/users/${userId}/playlists`,
-      {
+    if (playlistName) {
+      const response = await fetch(
+        `https://api.spotify.com/v1/users/${userId}/playlists`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: playlistName,
+            description: "New playlist description",
+            public: false,
+          }),
+        }
+      );
+
+      const json = await response.json();
+      const playlistId = json.id;
+
+      await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${accessToken}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: playlistName,
-          description: "New playlist description",
-          public: false,
+          uris: playlist.map((song) => song.uri),
+          position: 0,
         }),
-      }
-    );
-
-    const json = await response.json();
-    const playlistId = json.id;
-
-    await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        uris: playlist.map((song) => song.uri),
-        position: 0,
-      }),
-    });
-    setPlaylistName("");
-    setResult(undefined);
+      });
+      setPlaylistName("");
+      setResult(undefined);
+    } else {
+      alert("Enter Name Of Playlist");
+    }
   };
 
   return (
